@@ -40,7 +40,7 @@ public class CalendarService {
     public void updateCalendar(Long id, CalendarDto calendarDto) {
 
         LocalDateTime now = LocalDateTime.now();
-        CalendarModel existingCalendar = null;
+        CalendarModel existingCalendar;
 
         try {
             existingCalendar = calendarRepository.getCalendarById(id);
@@ -61,7 +61,7 @@ public class CalendarService {
 
     // 삭제
     public void deleteCalendar(Long id, String password) {
-        CalendarModel existingCalendar = null;
+        CalendarModel existingCalendar;
 
         try {
             existingCalendar = calendarRepository.getCalendarById(id);
