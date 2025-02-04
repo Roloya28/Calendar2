@@ -1,7 +1,3 @@
-create database calendar default character set utf8 collate utf8_general_ci;
-
-use calendar;
-
 create table calendar (
                           id int auto_increment primary key,
                           author varchar(100) not null COMMENT '작성자',
