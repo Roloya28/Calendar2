@@ -16,11 +16,13 @@ public class CalendarRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    // Create
     public int createCalendar(CalendarModel calendarModel) {
         String sql = "insert into calendar (author, todolist, password, createDate, updateDate) values(?,?,?,?,?)";
         return jdbcTemplate.update(sql, calendarModel.getAuthor(), calendarModel.getTodolist(), calendarModel.getPassword(), calendarModel.getCreateDate(), calendarModel.getUpdateDate());
     }
 
+    // Read
     public List<CalendarModel> getAllCalendars(String author, String updateDate) {
         StringBuilder sql = new StringBuilder("select * from calendar where 1=1");
         List<Object> params = new ArrayList<>();
@@ -40,16 +42,19 @@ public class CalendarRepository {
         return jdbcTemplate.query(sql.toString(), params.toArray(), new BeanPropertyRowMapper<>(CalendarModel.class));
     }
 
+    // Read
     public CalendarModel getCalendarById(Long id) {
         String sql = "select * from calendar where id = ?";
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(CalendarModel.class), id);
     }
 
+    // Update
     public void updateCalendar(CalendarModel calendarModel) {
         String sql = "update calendar set todolist = ?, author = ?, updateDate = ?, where id = ?";
         jdbcTemplate.update(sql, calendarModel.getTodolist(), calendarModel.getAuthor(), calendarModel.getUpdateDate(), calendarModel.getId());
     }
 
+    // Delete
     public void deleteCalendar(Long id) {
         String sql = "delete from calendar where id = ?";
         jdbcTemplate.update(sql, id);
